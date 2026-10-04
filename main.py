@@ -1,6 +1,7 @@
+
 import os
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
 # ================= AUTOMATIC SETTINGS BY AI =================
 BOT_TOKEN = "8615620812:AAExMExwJPDna6h5oWZtcbn7fefxY8CITbs"  # आपका बोट टोकन सेट है
@@ -39,7 +40,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     welcome_text = (
         f"👋 Hello {user_name}!\n\n"
         f"Welcome to the **JAGUAR COLOUR TRADING VIP Verification Bot**.\n\n"
-        f"📌 **Step 1:** हमारे पार्टनर लिंक से Exness अकाउंट बनाएं:\n"
+        f"📌 **Step 1:** हमारे पार्टनर连接 से Exness अकाउंट बनाएं:\n"
         f"👉 [Click Here to Sign Up](https://exnessonelink.com)\n"
         f"➡️ Partner Code: `bot68`\n\n"
         f"📌 **Step 2:** अकाउंट बनाने के बाद, अपना **Exness Account Number (UID)** यहाँ चैट में टाइप करके भेजें।"
@@ -99,7 +100,8 @@ async def verify_uid(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(fail_text, parse_mode="Markdown", disable_web_page_preview=True)
 
 def main():
-    app = Application.builder().token(BOT_TOKEN).build()
+    # यहाँ एरर को फिक्स करने के लिए ApplicationBuilder का सही फॉर्मेट सेट किया है
+    app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("add", add_user))
     app.add_handler(CommandHandler("del", del_user))
